@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { MetadataViewComponent } from "./metadata-view.component";
 import { NO_ERRORS_SCHEMA } from "@angular/core";
@@ -9,13 +9,15 @@ describe("MetadataViewComponent", () => {
   let component: MetadataViewComponent;
   let fixture: ComponentFixture<MetadataViewComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      schemas: [NO_ERRORS_SCHEMA],
-      declarations: [MetadataViewComponent],
-      imports: [MatTableModule, PipesModule]
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        schemas: [NO_ERRORS_SCHEMA],
+        declarations: [MetadataViewComponent],
+        imports: [MatTableModule, PipesModule],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MetadataViewComponent);
@@ -31,15 +33,13 @@ describe("MetadataViewComponent", () => {
     it("should parse a typed metadata object to an array", () => {
       const testMetadata = {
         typedTestName: {
-          type: "string",
           value: "test",
-          unit: ""
-        }
+          unit: "",
+        },
       };
       const metadataArray = component.createMetadataArray(testMetadata);
 
       expect(metadataArray[0]["name"]).toEqual("typedTestName");
-      expect(metadataArray[0]["type"]).toEqual("string");
       expect(metadataArray[0]["value"]).toEqual("test");
       expect(metadataArray[0]["unit"]).toEqual("");
     });
@@ -48,15 +48,65 @@ describe("MetadataViewComponent", () => {
       const testMetadata = {
         untypedTestName: {
           v: "test",
-          u: ""
-        }
+          u: "",
+        },
       };
       const metadataArray = component.createMetadataArray(testMetadata);
 
       expect(metadataArray[0]["name"]).toEqual("untypedTestName");
-      expect(metadataArray[0]["type"]).toEqual("");
-      expect(metadataArray[0]["value"]).toEqual('{"v":"test","u":""}');
+      expect(metadataArray[0]["value"]).toEqual(
+        JSON.stringify({ v: "test", u: "" })
+      );
       expect(metadataArray[0]["unit"]).toEqual("");
+    });
+  });
+
+  describe("#isDate()", () => {
+    it("should return false if scientificMetadata item is a quantity", () => {
+      const metadata = {
+        name: "wavelength",
+        value: 1024,
+        unit: "nanometers",
+      };
+
+      const isDate = component.isDate(metadata);
+
+      expect(isDate).toEqual(false);
+    });
+
+    it("should return false if scientificMetadata value is a number", () => {
+      const metadata = {
+        name: "test",
+        value: 1024,
+        unit: "",
+      };
+
+      const isDate = component.isDate(metadata);
+
+      expect(isDate).toEqual(false);
+    });
+
+    it("should return false if scientificMetadata value is a string", () => {
+      const metadata = {
+        name: "test",
+        value: "test value",
+        unit: "",
+      };
+
+      const isDate = component.isDate(metadata);
+
+      expect(isDate).toEqual(false);
+    });
+    it("should return true if scientificMetadata item is a date string", () => {
+      const metadata = {
+        name: "today",
+        value: new Date().toISOString(),
+        unit: "",
+      };
+
+      const isDate = component.isDate(metadata);
+
+      expect(isDate).toEqual(true);
     });
   });
 });

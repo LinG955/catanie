@@ -1,6 +1,7 @@
 /* tslint:disable */
 import {
   PublishedData,
+  Sample,
   Datablock,
   OrigDatablock,
   Attachment,
@@ -43,18 +44,19 @@ export interface DerivedDatasetInterface {
   "history"?: Array<any>;
   "datasetlifecycle"?: any;
   "publisheddataId"?: string;
+  "techniques"?: Array<any>;
   "createdAt"?: Date;
   "updatedAt"?: Date;
   "instrumentId"?: string;
-  "techniques"?: Array<any>;
   historyList?: any[];
   datasetLifecycle?: any[];
   publisheddata?: PublishedData;
+  techniquesList?: any[];
+  samples?: Sample[];
   datablocks?: Datablock[];
   origdatablocks?: OrigDatablock[];
   attachments?: Attachment[];
   instrument?: Instrument;
-  techniquesList?: any[];
 }
 
 export class DerivedDataset implements DerivedDatasetInterface {
@@ -92,18 +94,19 @@ export class DerivedDataset implements DerivedDatasetInterface {
   "history": Array<any>;
   "datasetlifecycle": any;
   "publisheddataId": string;
+  "techniques": Array<any>;
   "createdAt": Date;
   "updatedAt": Date;
   "instrumentId": string;
-  "techniques": Array<any>;
   historyList: any[];
   datasetLifecycle: any[];
   publisheddata: PublishedData;
+  techniquesList: any[];
+  samples: Sample[];
   datablocks: Datablock[];
   origdatablocks: OrigDatablock[];
   attachments: Attachment[];
   instrument: Instrument;
-  techniquesList: any[];
   constructor(data?: DerivedDatasetInterface) {
     Object.assign(this, data);
   }
@@ -274,6 +277,11 @@ export class DerivedDataset implements DerivedDatasetInterface {
           name: 'publisheddataId',
           type: 'string'
         },
+        "techniques": {
+          name: 'techniques',
+          type: 'Array&lt;any&gt;',
+          default: <any>[]
+        },
         "createdAt": {
           name: 'createdAt',
           type: 'Date'
@@ -285,11 +293,6 @@ export class DerivedDataset implements DerivedDatasetInterface {
         "instrumentId": {
           name: 'instrumentId',
           type: 'string'
-        },
-        "techniques": {
-          name: 'techniques',
-          type: 'Array&lt;any&gt;',
-          default: <any>[]
         },
       },
       relations: {
@@ -316,6 +319,22 @@ export class DerivedDataset implements DerivedDatasetInterface {
           relationType: 'belongsTo',
                   keyFrom: 'publisheddataId',
           keyTo: 'doi'
+        },
+        techniquesList: {
+          name: 'techniquesList',
+          type: 'any[]',
+          model: '',
+          relationType: 'embedsMany',
+                  keyFrom: 'techniques',
+          keyTo: 'pid'
+        },
+        samples: {
+          name: 'samples',
+          type: 'Sample[]',
+          model: 'Sample',
+          relationType: 'hasMany',
+                  keyFrom: 'pid',
+          keyTo: 'derivedDatasetId'
         },
         datablocks: {
           name: 'datablocks',
@@ -347,14 +366,6 @@ export class DerivedDataset implements DerivedDatasetInterface {
           model: 'Instrument',
           relationType: 'belongsTo',
                   keyFrom: 'instrumentId',
-          keyTo: 'pid'
-        },
-        techniquesList: {
-          name: 'techniquesList',
-          type: 'any[]',
-          model: '',
-          relationType: 'embedsMany',
-                  keyFrom: 'techniques',
           keyTo: 'pid'
         },
       }

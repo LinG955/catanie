@@ -5,6 +5,7 @@ import { Injectable } from "@angular/core";
 })
 export class UnitsService {
   private UNITS = {
+    angle: ["rad", "deg", "grad", "arcsec", "arcmin"],
     area: ["cm^2", "m^2", "mm^2"],
     charge: ["coulomb"],
     current: ["ampere"],
@@ -70,27 +71,6 @@ export class UnitsService {
     "mm^3": "mm\u00B3"
   };
 
-  getSymbol(unit: string): string {
-    const symbol = this.SYMBOLS[unit];
-    return symbol ? symbol : unit;
-  }
-
-  getUnits(variable: string): string[] {
-    const kind = this.getKind(variable);
-    if (kind) {
-      return this.UNITS[kind];
-    } else {
-      return [].concat
-        .apply(
-          [],
-          Object.keys(this.UNITS).map(key => this.UNITS[key])
-        )
-        .sort((a: string, b: string) =>
-          a.toLowerCase().localeCompare(b.toLowerCase())
-        );
-    }
-  }
-
   private getKind(variable: string): string {
     const kinds = Object.keys(this.UNITS);
     return this.parse(variable).filter(suggestion =>
@@ -110,5 +90,32 @@ export class UnitsService {
       .filter(part => isNaN(Number(part)))
       .map(part => (part.includes("length") ? "length" : part))
       .map(part => part.replace(/\d+/, ""));
+  }
+
+  private flattenUnits(): string[] {
+    return [].concat
+        .apply(
+          [],
+          Object.keys(this.UNITS).map(key => this.UNITS[key])
+        )
+        .sort((a: string, b: string) =>
+          a.toLowerCase().localeCompare(b.toLowerCase())
+        );
+  }
+
+  getSymbol(unit: string): string {
+    const symbol = this.SYMBOLS[unit];
+    return symbol ? symbol : unit;
+  }
+
+  getUnits(variable?: string): string[] {
+    if (!variable) {
+      return this.flattenUnits();
+    }
+    const kind = this.getKind(variable);
+    if (!kind) {
+      return this.flattenUnits();
+    }
+    return this.UNITS[kind];
   }
 }

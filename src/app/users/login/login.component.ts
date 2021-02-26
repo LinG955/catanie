@@ -34,6 +34,12 @@ interface LoginForm {
   styleUrls: ["login.component.scss"]
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  private proceedSubscription: Subscription;
+  private hasUser$ = this.store.pipe(
+    select(getIsLoggedIn),
+    filter(is => is)
+  );
+
   returnUrl: string;
   hide = true;
 
@@ -44,12 +50,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   });
 
   loading$ = this.store.pipe(select(getIsLoggingIn));
-  private hasUser$ = this.store.pipe(
-    select(getIsLoggedIn),
-    filter(is => is)
-  );
-
-  private proceedSubscription: Subscription;
 
   openPrivacyDialog() {
     this.dialog.open(PrivacyDialogComponent, {

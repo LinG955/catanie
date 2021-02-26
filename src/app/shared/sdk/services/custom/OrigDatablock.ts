@@ -65,11 +65,11 @@ export class OrigDatablockApi extends BaseLoopBackApi {
   }
 
   /**
-   * 按标识查找 files 的相关项。
+   * Find a related item by id for files.
    *
    * @param {any} id OrigDatablock id
    *
-   * @param {any} fk files 的外键
+   * @param {any} fk Foreign key for files
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -95,11 +95,11 @@ export class OrigDatablockApi extends BaseLoopBackApi {
   }
 
   /**
-   * 按标识删除 files 的相关项。
+   * Delete a related item by id for files.
    *
    * @param {any} id OrigDatablock id
    *
-   * @param {any} fk files 的外键
+   * @param {any} fk Foreign key for files
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -122,11 +122,11 @@ export class OrigDatablockApi extends BaseLoopBackApi {
   }
 
   /**
-   * 按标识更新 files 的相关项。
+   * Update a related item by id for files.
    *
    * @param {any} id OrigDatablock id
    *
-   * @param {any} fk files 的外键
+   * @param {any} fk Foreign key for files
    *
    * @param {object} data Request data.
    *
@@ -158,7 +158,7 @@ export class OrigDatablockApi extends BaseLoopBackApi {
   }
 
   /**
-   * 查询 OrigDatablock 的 files。
+   * Queries files of OrigDatablock.
    *
    * @param {any} id OrigDatablock id
    *
@@ -188,7 +188,7 @@ export class OrigDatablockApi extends BaseLoopBackApi {
   }
 
   /**
-   * 在此模型的 files 中创建新实例。
+   * Creates a new instance in files of this model.
    *
    * @param {any} id OrigDatablock id
    *
@@ -221,7 +221,7 @@ export class OrigDatablockApi extends BaseLoopBackApi {
   }
 
   /**
-   * 删除此模型的所有 files。
+   * Deletes all files of this model.
    *
    * @param {any} id OrigDatablock id
    *
@@ -245,7 +245,7 @@ export class OrigDatablockApi extends BaseLoopBackApi {
   }
 
   /**
-   * 计算 files 的数量（OrigDatablock）。
+   * Counts files of OrigDatablock.
    *
    * @param {any} id OrigDatablock id
    *
@@ -460,7 +460,7 @@ export class OrigDatablockApi extends BaseLoopBackApi {
   }
 
   /**
-   * 在此模型的 files 中创建新实例。
+   * Creates a new instance in files of this model.
    *
    * @param {any} id OrigDatablock id
    *

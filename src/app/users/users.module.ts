@@ -37,7 +37,7 @@ import {LssfAuthService} from "./lssf-auth.service";
     MatInputModule,
     ReactiveFormsModule,
     SharedCatanieModule,
-    StoreModule.forFeature("users", userReducer)
+    StoreModule.forFeature("users", userReducer),
   ],
   declarations: [LoginComponent, UserSettingsComponent, PrivacyDialogComponent],
   entryComponents: [PrivacyDialogComponent],

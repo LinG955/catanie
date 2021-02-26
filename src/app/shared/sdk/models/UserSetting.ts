@@ -9,7 +9,11 @@ export interface UserSettingInterface {
   "columns"?: Array<any>;
   "datasetCount"?: number;
   "jobCount"?: number;
+  "createdBy"?: string;
+  "updatedBy"?: string;
   "userId"?: any;
+  "createdAt"?: Date;
+  "updatedAt"?: Date;
   user?: User;
 }
 
@@ -18,7 +22,11 @@ export class UserSetting implements UserSettingInterface {
   "columns": Array<any>;
   "datasetCount": number;
   "jobCount": number;
+  "createdBy": string;
+  "updatedBy": string;
   "userId": any;
+  "createdAt": Date;
+  "updatedAt": Date;
   user: User;
   constructor(data?: UserSettingInterface) {
     Object.assign(this, data);
@@ -71,9 +79,25 @@ export class UserSetting implements UserSettingInterface {
           type: 'number',
           default: 25
         },
+        "createdBy": {
+          name: 'createdBy',
+          type: 'string'
+        },
+        "updatedBy": {
+          name: 'updatedBy',
+          type: 'string'
+        },
         "userId": {
           name: 'userId',
           type: 'any'
+        },
+        "createdAt": {
+          name: 'createdAt',
+          type: 'Date'
+        },
+        "updatedAt": {
+          name: 'updatedAt',
+          type: 'Date'
         },
       },
       relations: {

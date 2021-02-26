@@ -368,7 +368,7 @@ export class InstrumentApi extends BaseLoopBackApi {
   }
 
   /**
-   * 在此模型的 datasets 中创建新实例。
+   * Creates a new instance in datasets of this model.
    *
    * @param {any} id Instrument id
    *

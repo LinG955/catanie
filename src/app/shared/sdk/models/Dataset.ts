@@ -1,6 +1,7 @@
 /* tslint:disable */
 import {
   PublishedData,
+  Sample,
   Datablock,
   OrigDatablock,
   Attachment,
@@ -37,19 +38,20 @@ export interface DatasetInterface {
   "history"?: Array<any>;
   "datasetlifecycle"?: any;
   "publisheddataId"?: string;
+  "techniques"?: Array<any>;
   "publishedDataId"?: string;
   "createdAt"?: Date;
   "updatedAt"?: Date;
   "instrumentId"?: string;
-  "techniques"?: Array<any>;
   historyList?: any[];
   datasetLifecycle?: any[];
   publisheddata?: PublishedData;
+  techniquesList?: any[];
+  samples?: Sample[];
   datablocks?: Datablock[];
   origdatablocks?: OrigDatablock[];
   attachments?: Attachment[];
   instrument?: Instrument;
-  techniquesList?: any[];
 }
 
 export class Dataset implements DatasetInterface {
@@ -81,19 +83,20 @@ export class Dataset implements DatasetInterface {
   "history": Array<any>;
   "datasetlifecycle": any;
   "publisheddataId": string;
+  "techniques": Array<any>;
   "publishedDataId": string;
   "createdAt": Date;
   "updatedAt": Date;
   "instrumentId": string;
-  "techniques": Array<any>;
   historyList: any[];
   datasetLifecycle: any[];
   publisheddata: PublishedData;
+  techniquesList: any[];
+  samples: Sample[];
   datablocks: Datablock[];
   origdatablocks: OrigDatablock[];
   attachments: Attachment[];
   instrument: Instrument;
-  techniquesList: any[];
   constructor(data?: DatasetInterface) {
     Object.assign(this, data);
   }
@@ -240,6 +243,11 @@ export class Dataset implements DatasetInterface {
           name: 'publisheddataId',
           type: 'string'
         },
+        "techniques": {
+          name: 'techniques',
+          type: 'Array&lt;any&gt;',
+          default: <any>[]
+        },
         "publishedDataId": {
           name: 'publishedDataId',
           type: 'string'
@@ -255,11 +263,6 @@ export class Dataset implements DatasetInterface {
         "instrumentId": {
           name: 'instrumentId',
           type: 'string'
-        },
-        "techniques": {
-          name: 'techniques',
-          type: 'Array&lt;any&gt;',
-          default: <any>[]
         },
       },
       relations: {
@@ -286,6 +289,22 @@ export class Dataset implements DatasetInterface {
           relationType: 'belongsTo',
                   keyFrom: 'publisheddataId',
           keyTo: 'doi'
+        },
+        techniquesList: {
+          name: 'techniquesList',
+          type: 'any[]',
+          model: '',
+          relationType: 'embedsMany',
+                  keyFrom: 'techniques',
+          keyTo: 'pid'
+        },
+        samples: {
+          name: 'samples',
+          type: 'Sample[]',
+          model: 'Sample',
+          relationType: 'hasMany',
+                  keyFrom: 'pid',
+          keyTo: 'datasetId'
         },
         datablocks: {
           name: 'datablocks',
@@ -317,14 +336,6 @@ export class Dataset implements DatasetInterface {
           model: 'Instrument',
           relationType: 'belongsTo',
                   keyFrom: 'instrumentId',
-          keyTo: 'pid'
-        },
-        techniquesList: {
-          name: 'techniquesList',
-          type: 'any[]',
-          model: '',
-          relationType: 'embedsMany',
-                  keyFrom: 'techniques',
           keyTo: 'pid'
         },
       }

@@ -77,10 +77,10 @@ export class DatafilesComponent
   tableColumns: TableColumn[] = [
     {
       name: "path",
-      icon: "folder",
+      icon: "save",
       sort: false,
       inList: true,
-      pipe: FilePathTruncate,
+      // pipe: FilePathTruncate,
     },
     {
       name: "size",
@@ -98,6 +98,14 @@ export class DatafilesComponent
     },
   ];
   tableData: File[];
+
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store<Dataset>,
+    private cdRef: ChangeDetectorRef,
+    private userApi: UserApi,
+    @Inject(APP_CONFIG) public appConfig: AppConfig
+  ) {}
 
   onPageChange(event: PageChangeEvent) {
     const { pageIndex, pageSize } = event;
@@ -123,7 +131,11 @@ export class DatafilesComponent
     if (!this.tableData) {
       return [];
     }
-    return this.tableData.map((file) => file.path);
+    return this.tableData.map((file) =>
+      file.path.includes("/")
+        ? file.path.split("/")[file.path.split("/").length - 1]
+        : file.path
+    );
   }
 
   getSelectedFiles() {
@@ -132,7 +144,11 @@ export class DatafilesComponent
     }
     return this.tableData
       .filter((file) => file.selected)
-      .map((file) => file.path);
+      .map((file) =>
+        file.path.includes("/")
+          ? file.path.split("/")[file.path.split("/").length - 1]
+          : file.path
+      );
   }
 
   updateSelectionStatus() {
@@ -178,14 +194,6 @@ export class DatafilesComponent
     }
   }
 
-  constructor(
-    private route: ActivatedRoute,
-    private store: Store<Dataset>,
-    private cdRef: ChangeDetectorRef,
-    private userApi: UserApi,
-    @Inject(APP_CONFIG) public appConfig: AppConfig
-  ) {}
-
   ngOnInit() {
     this.subscriptions.push(
       this.userApi.jwt().subscribe((jwt) => {
@@ -222,10 +230,10 @@ export class DatafilesComponent
         this.count = files.length;
         this.tableData = files.slice(0, this.pageSize);
         this.files = files.map((file) => {
-          if (file.path.indexOf("/") !== -1) {
-            const splitPath = file.path.split("/");
-            file.path = splitPath[splitPath.length - 1];
-          }
+          // if (file.path.indexOf("/") !== -1) {
+          //   const splitPath = file.path.split("/");
+          //   file.path = splitPath[splitPath.length - 1];
+          // }
           return file;
         });
         this.tooLargeFile = this.hasTooLargeFiles(this.files);

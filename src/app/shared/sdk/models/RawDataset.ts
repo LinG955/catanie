@@ -44,22 +44,23 @@ export interface RawDatasetInterface {
   "history"?: Array<any>;
   "datasetlifecycle"?: any;
   "publisheddataId"?: string;
+  "techniques"?: Array<any>;
   "createdAt"?: Date;
   "updatedAt"?: Date;
   "sampleId"?: string;
   "proposalId"?: string;
   "instrumentId"?: string;
-  "techniques"?: Array<any>;
   historyList?: any[];
   datasetLifecycle?: any[];
   publisheddata?: PublishedData;
+  techniquesList?: any[];
+  samples?: Sample[];
   sample?: Sample;
   proposal?: Proposal;
   datablocks?: Datablock[];
   origdatablocks?: OrigDatablock[];
   attachments?: Attachment[];
   instrument?: Instrument;
-  techniquesList?: any[];
 }
 
 export class RawDataset implements RawDatasetInterface {
@@ -96,22 +97,23 @@ export class RawDataset implements RawDatasetInterface {
   "history": Array<any>;
   "datasetlifecycle": any;
   "publisheddataId": string;
+  "techniques": Array<any>;
   "createdAt": Date;
   "updatedAt": Date;
   "sampleId": string;
   "proposalId": string;
   "instrumentId": string;
-  "techniques": Array<any>;
   historyList: any[];
   datasetLifecycle: any[];
   publisheddata: PublishedData;
+  techniquesList: any[];
+  samples: Sample[];
   sample: Sample;
   proposal: Proposal;
   datablocks: Datablock[];
   origdatablocks: OrigDatablock[];
   attachments: Attachment[];
   instrument: Instrument;
-  techniquesList: any[];
   constructor(data?: RawDatasetInterface) {
     Object.assign(this, data);
   }
@@ -278,6 +280,11 @@ export class RawDataset implements RawDatasetInterface {
           name: 'publisheddataId',
           type: 'string'
         },
+        "techniques": {
+          name: 'techniques',
+          type: 'Array&lt;any&gt;',
+          default: <any>[]
+        },
         "createdAt": {
           name: 'createdAt',
           type: 'Date'
@@ -297,11 +304,6 @@ export class RawDataset implements RawDatasetInterface {
         "instrumentId": {
           name: 'instrumentId',
           type: 'string'
-        },
-        "techniques": {
-          name: 'techniques',
-          type: 'Array&lt;any&gt;',
-          default: <any>[]
         },
       },
       relations: {
@@ -328,6 +330,22 @@ export class RawDataset implements RawDatasetInterface {
           relationType: 'belongsTo',
                   keyFrom: 'publisheddataId',
           keyTo: 'doi'
+        },
+        techniquesList: {
+          name: 'techniquesList',
+          type: 'any[]',
+          model: '',
+          relationType: 'embedsMany',
+                  keyFrom: 'techniques',
+          keyTo: 'pid'
+        },
+        samples: {
+          name: 'samples',
+          type: 'Sample[]',
+          model: 'Sample',
+          relationType: 'hasMany',
+                  keyFrom: 'pid',
+          keyTo: 'rawDatasetId'
         },
         sample: {
           name: 'sample',
@@ -375,14 +393,6 @@ export class RawDataset implements RawDatasetInterface {
           model: 'Instrument',
           relationType: 'belongsTo',
                   keyFrom: 'instrumentId',
-          keyTo: 'pid'
-        },
-        techniquesList: {
-          name: 'techniquesList',
-          type: 'any[]',
-          model: '',
-          relationType: 'embedsMany',
-                  keyFrom: 'techniques',
           keyTo: 'pid'
         },
       }

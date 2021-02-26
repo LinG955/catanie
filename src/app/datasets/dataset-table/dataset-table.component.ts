@@ -41,10 +41,10 @@ export interface SortChangeEvent {
   direction: "asc" | "desc" | "";
 }
 
-interface DatasetDerivationsMap {
-  datasetPid: string;
-  derivedDatasetsNum: number;
-}
+// interface DatasetDerivationsMap {
+//   datasetPid: string;
+//   derivedDatasetsNum: number;
+// }
 
 @Component({
   selector: "dataset-table",
@@ -52,6 +52,9 @@ interface DatasetDerivationsMap {
   styleUrls: ["dataset-table.component.scss"]
 })
 export class DatasetTableComponent implements OnInit, OnDestroy, OnChanges {
+  private inBatchPids: string[] = [];
+  private subscriptions: Subscription[] = [];
+
   currentPage$ = this.store.pipe(select(getPage));
   datasetsPerPage$ = this.store.pipe(select(getDatasetsPerPage));
   datasetCount$ = this.store.select(getTotalSets);
@@ -60,16 +63,17 @@ export class DatasetTableComponent implements OnInit, OnDestroy, OnChanges {
   displayedColumns: string[];
   @Input() selectedSets: Dataset[] = [];
 
-  private inBatchPids: string[] = [];
-
   datasets: Dataset[];
-  datasetDerivationsMaps: DatasetDerivationsMap[] = [];
-  derivationMapPids: string[] = [];
-
-  private subscriptions: Subscription[] = [];
+  // datasetDerivationsMaps: DatasetDerivationsMap[] = [];
+  // derivationMapPids: string[] = [];
 
   @Output() settingsClick = new EventEmitter<MouseEvent>();
   @Output() rowClick = new EventEmitter<Dataset>();
+
+  constructor(
+    @Inject(APP_CONFIG) public appConfig: AppConfig,
+    private store: Store<any>
+  ) {}
 
   doSettingsClick(event: MouseEvent) {
     this.settingsClick.emit(event);
@@ -188,25 +192,20 @@ export class DatasetTableComponent implements OnInit, OnDestroy, OnChanges {
     this.store.dispatch(sortByColumnAction({ column, direction }));
   }
 
-  countDerivedDatasets(dataset: Dataset): number {
-    let derivedDatasetsNum = 0;
-    if (dataset.history) {
-      dataset.history.forEach(item => {
-        if (
-          item.hasOwnProperty("derivedDataset") &&
-          this.datasets.map(set => set.pid).includes(item.derivedDataset.pid)
-        ) {
-          derivedDatasetsNum++;
-        }
-      });
-    }
-    return derivedDatasetsNum;
-  }
-
-  constructor(
-    @Inject(APP_CONFIG) public appConfig: AppConfig,
-    private store: Store<any>
-  ) {}
+  // countDerivedDatasets(dataset: Dataset): number {
+  //   let derivedDatasetsNum = 0;
+  //   if (dataset.history) {
+  //     dataset.history.forEach(item => {
+  //       if (
+  //         item.hasOwnProperty("derivedDataset") &&
+  //         this.datasets.map(set => set.pid).includes(item.derivedDataset.pid)
+  //       ) {
+  //         derivedDatasetsNum++;
+  //       }
+  //     });
+  //   }
+  //   return derivedDatasetsNum;
+  // }
 
   ngOnInit() {
     this.subscriptions.push(
@@ -225,15 +224,15 @@ export class DatasetTableComponent implements OnInit, OnDestroy, OnChanges {
       this.store.pipe(select(getDatasets)).subscribe(datasets => {
         this.datasets = datasets;
 
-        this.derivationMapPids = this.datasetDerivationsMaps.map(
-          datasetderivationMap => datasetderivationMap.datasetPid
-        );
-        this.datasetDerivationsMaps = datasets
-          .filter(({ pid }) => !this.derivationMapPids.includes(pid))
-          .map(dataset => ({
-            datasetPid: dataset.pid,
-            derivedDatasetsNum: this.countDerivedDatasets(dataset)
-          }));
+        // this.derivationMapPids = this.datasetDerivationsMaps.map(
+        //   datasetderivationMap => datasetderivationMap.datasetPid
+        // );
+        // this.datasetDerivationsMaps = datasets
+        //   .filter(({ pid }) => !this.derivationMapPids.includes(pid))
+        //   .map(dataset => ({
+        //     datasetPid: dataset.pid,
+        //     derivedDatasetsNum: this.countDerivedDatasets(dataset)
+        //   }));
       })
     );
   }
