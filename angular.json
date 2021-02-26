@@ -82,6 +82,46 @@
               ],
               "serviceWorker": true
             },
+            "nsrl-dev": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.nsrl-dev.ts"
+                },
+                {
+                  "replace": "src/assets/images/ess-site.png",
+                  "with": "CI/NSRL/nsrl-site.jpg"
+                },
+                {
+                  "replace": "src/assets/images/esslogo.png",
+                  "with": "CI/NSRL/nsrl-logo-white.png"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "CI/NSRL/favicon.ico"
+                },
+                {
+                  "replace": "src/theme.scss",
+                  "with": "CI/NSRL/theme.scss"
+                }
+              ],
+              "serviceWorker": true
+            },
             "e2e": {
               "budgets": [
                 {
@@ -373,12 +413,15 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "catanie:build",
-            "port": 4200,
+            "port": 4222,
             "host": "0.0.0.0"
           },
           "configurations": {
             "dmscdev": {
               "browserTarget": "catanie:build:dmscdev"
+            },
+            "nsrl-dev": {
+              "browserTarget": "catanie:build:nsrl-dev"
             },
             "e2e": {
               "browserTarget": "catanie:build:e2e"

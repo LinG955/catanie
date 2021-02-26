@@ -2,7 +2,7 @@
   <mat-tab-group>
     <mat-tab>
       <ng-template mat-tab-label>
-        <mat-icon> details </mat-icon> Details
+        <mat-icon> details </mat-icon> 详情
       </ng-template>
 
       <div fxLayout="row">
@@ -31,7 +31,7 @@
       </div>
 
       <div style="clear: both;"></div>
-
+<!--数据集详情-->
       <dataset-detail
         [dataset]="dataset"
         [datasetWithout]="datasetWithout$ | async"
@@ -46,10 +46,10 @@
         (saveMetadata)="onSaveMetadata($event)"
       ></dataset-detail>
     </mat-tab>
-
+<!--文件下载-->
     <mat-tab>
       <ng-template mat-tab-label>
-        <mat-icon> cloud_download </mat-icon> Datafiles
+        <mat-icon> cloud_download </mat-icon> 数据下载
       </ng-template>
       <div class="datafiles-container">
         <datafiles></datafiles>
@@ -66,14 +66,14 @@
 
     <mat-tab *ngIf="appConfig.datasetReduceEnabled">
       <ng-template mat-tab-label>
-        <mat-icon> tune </mat-icon> Reduce
+        <mat-icon> tune </mat-icon> 在线处理
       </ng-template>
       <reduce [dataset]="dataset"></reduce>
     </mat-tab>
 
     <mat-tab *ngIf="attachments$ | async as attachments">
       <ng-template mat-tab-label>
-        <mat-icon> insert_photo </mat-icon> Attachments
+        <mat-icon> insert_photo </mat-icon> 附图
       </ng-template>
 
       <div class="file-uploader">
@@ -96,7 +96,7 @@
 
     <mat-tab>
       <ng-template mat-tab-label>
-        <mat-icon> loop </mat-icon> Lifecycle
+        <mat-icon> loop </mat-icon> 生命周期
       </ng-template>
 
       <dataset-lifecycle [dataset]="dataset"></dataset-lifecycle>
@@ -104,7 +104,7 @@
 
     <mat-tab *ngIf="isAdmin$ | async">
       <ng-template mat-tab-label>
-        <mat-icon> settings </mat-icon> Admin
+        <mat-icon> settings </mat-icon> 管理
       </ng-template>
 
       <mat-card>

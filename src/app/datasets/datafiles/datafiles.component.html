@@ -1,7 +1,7 @@
 <ng-template [ngIf]="maxFileSize && tooLargeFile">
   <span>
     <mat-icon class="warning-icon"> warning </mat-icon>
-    One or more files are too large to be downloaded directly.
+    一个或多个文件太大，无法直接下载！
     {{
       sftpHost
         ? "These files are available via sftp host " +
@@ -16,15 +16,15 @@
 
 <ng-template [ngIf]="maxFileSize">
   <div>
-    <mat-icon> info </mat-icon>
-    Maximum allowed download size: {{ maxFileSize | filesize }}
+    <mat-icon> warning </mat-icon>
+    一次下载的文件大小不能超过: {{ maxFileSize | filesize }}
   </div>
 </ng-template>
 
 <ng-template [ngIf]="tableData && maxFileSize">
   <div class="selected" fxLayout="row" fxLayoutAlign="space-evenly end">
     <div fxFlex="auto" style="margin-bottom: 0.5em;">
-      Selected: {{ selectedFileSize | filesize
+      目前已选择的下载文件大小: {{ selectedFileSize | filesize
       }}{{ maxFileSize ? " / " + (maxFileSize | filesize) : "" }}
     </div>
   </div>
@@ -59,7 +59,7 @@
       color="accent"
       [disabled]="totalFileSize > maxFileSize"
     >
-      Download All
+      下载所有文件
     </button>
   </form>
 
@@ -87,7 +87,7 @@
         isNoneSelected || (maxFileSize && selectedFileSize > maxFileSize)
       "
     >
-      Download Selected
+      下载已选文件
     </button>
   </form>
   <div style="clear: both;"></div>

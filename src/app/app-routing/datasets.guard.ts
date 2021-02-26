@@ -21,7 +21,11 @@ export class DatasetsGuard implements CanActivate {
       .getCurrent()
       .toPromise()
       .catch(() => {
-        this.router.navigateByUrl("/anonymous" + state.url);
+        // this.router.navigateByUrl("/anonymous" + state.url);
+        // 登录超时后返回登录页面
+        this.router.navigate(["/login"], {
+          queryParams: { returnUrl: state.url },
+        });
         return false;
       })
       .then(() => true);

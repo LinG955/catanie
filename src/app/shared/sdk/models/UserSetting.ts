@@ -5,19 +5,19 @@ import {
 
 declare var Object: any;
 export interface UserSettingInterface {
+  "id"?: string;
   "columns"?: Array<any>;
   "datasetCount"?: number;
   "jobCount"?: number;
-  "id"?: any;
   "userId"?: any;
   user?: User;
 }
 
 export class UserSetting implements UserSettingInterface {
+  "id": string;
   "columns": Array<any>;
   "datasetCount": number;
   "jobCount": number;
-  "id": any;
   "userId": any;
   user: User;
   constructor(data?: UserSettingInterface) {
@@ -53,6 +53,10 @@ export class UserSetting implements UserSettingInterface {
       path: 'UserSettings',
       idName: 'id',
       properties: {
+        "id": {
+          name: 'id',
+          type: 'string'
+        },
         "columns": {
           name: 'columns',
           type: 'Array&lt;any&gt;'
@@ -66,10 +70,6 @@ export class UserSetting implements UserSettingInterface {
           name: 'jobCount',
           type: 'number',
           default: 25
-        },
-        "id": {
-          name: 'id',
-          type: 'any'
         },
         "userId": {
           name: 'userId',

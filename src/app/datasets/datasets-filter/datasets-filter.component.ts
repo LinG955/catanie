@@ -1,5 +1,5 @@
 import { APP_CONFIG, AppConfig } from "app-config.module";
-import { Component, Inject } from "@angular/core";
+import {Component, Inject, OnInit} from "@angular/core";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 import { MatDialog } from "@angular/material/dialog";
 import * as moment from "moment";
@@ -66,7 +66,7 @@ export interface DateRange {
   templateUrl: "datasets-filter.component.html",
   styleUrls: ["datasets-filter.component.scss"]
 })
-export class DatasetsFilterComponent {
+export class DatasetsFilterComponent implements OnInit {
   locationFacetCounts$ = this.store.pipe(select(getLocationFacetCounts));
   groupFacetCounts$ = this.store.pipe(select(getGroupFacetCounts));
   typeFacetCounts$ = this.store.pipe(select(getTypeFacetCounts));
@@ -259,4 +259,9 @@ export class DatasetsFilterComponent {
     private store: Store<any>,
     @Inject(APP_CONFIG) public appConfig: AppConfig
   ) {}
+
+  ngOnInit() {
+    // this.groupSelected("P2021-HLS-PT-002434");
+    this.groupInput$.next("");
+  }
 }

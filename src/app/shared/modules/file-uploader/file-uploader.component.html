@@ -9,10 +9,10 @@
   (readEnd)="onReadEnd($event)"
 >
   <div fxLayout="column" style="align-items: center">
-    <div class="instructions">
-      Drop a file here
-    </div>
-    <div class="instructions">or</div>
+<!--    <div class="instructions">-->
+<!--      Drop a file here-->
+<!--    </div>-->
+<!--    <div class="instructions">or</div>-->
     <div class="instructions">
       <button
         mat-raised-button
@@ -26,7 +26,7 @@
         (filePick)="onFilePicked($event)"
         (readEnd)="onReadEnd($event)"
       >
-        Browse
+        选择图片
       </button>
     </div>
   </div>
@@ -60,13 +60,13 @@
           <input
             matInput
             id="caption"
-            placeholder="Edit caption"
+            placeholder="图片命名"
             value="{{ attachment.caption }}"
             #caption
           />
         </mat-form-field>
         <button mat-button type="submit" color="primary" class="submit-button">
-          Submit
+          提交
         </button>
       </form>
       <button mat-button (click)="onDeleteAttachment(attachment.id)">

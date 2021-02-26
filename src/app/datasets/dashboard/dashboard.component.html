@@ -2,27 +2,29 @@
   <mat-sidenav-content>
     <div fxLayout="row" fxLayout.xs="column">
       <div class="action-column" fxFlex="14" fxFlex.lt-xl="20">
+<!--调用左侧的数据集搜索组件-->
         <datasets-filter></datasets-filter>
-
-        <mat-card
-          *ngIf="appConfig.addDatasetEnabled"
-          class="add-card"
-          (click)="openDialog()"
-        >
-          <mat-icon> add_circle </mat-icon>
-          Create Dataset
-        </mat-card>
-
+<!--添加数据集对话框-->
+<!--        <mat-card-->
+<!--          *ngIf="appConfig.addDatasetEnabled"-->
+<!--          class="add-card"-->
+<!--          (click)="openDialog()"-->
+<!--        >-->
+<!--          <mat-icon> add_circle </mat-icon>-->
+<!--          Create Dataset-->
+<!--        </mat-card>-->
+<!--        暂不清楚是干嘛的-->
         <div *ngIf="!appConfig.shoppingCartOnHeader && nonEmpty$ | async">
           <batch-card></batch-card>
         </div>
       </div>
 
       <div class="table-column" fxFlex="85" fxFlex.lt-xl="80">
+<!--        上面的数据集展示筛选选项-->
         <dataset-table-actions
           [selectedSets]="selectedSets$ | async"
         ></dataset-table-actions>
-
+<!--        数据集表格-->
         <dataset-table
           [tableColumns]="tableColumns$ | async"
           [selectedSets]="selectedSets$ | async"
@@ -32,7 +34,7 @@
       </div>
     </div>
   </mat-sidenav-content>
-
+<!--展示数据集属性选项侧边栏-->
   <mat-sidenav #settings position="end" mode="push">
     <dataset-table-settings
       [selectableColumns]="selectableColumns$ | async"

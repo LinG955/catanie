@@ -4,26 +4,26 @@
     [value]="currentPublicViewMode"
     *ngIf="searchPublicDataEnabled"
   >
-    <mat-button-toggle [value]="false" (click)="onViewPublicChange(false)">
-      My Data
+    <mat-button-toggle [class.buttonToggle]="!toggleStyle" [value]="false" (click)="onViewPublicChange(false)">
+      我的数据
     </mat-button-toggle>
-    <mat-button-toggle [value]="true" (click)="onViewPublicChange(true)">
-      Public Data
-    </mat-button-toggle>
-  </mat-button-toggle-group>
-  <mat-button-toggle-group
-    [value]="currentArchViewMode"
-    *ngIf="appConfig.archiveWorkflowEnabled"
-  >
-    <mat-button-toggle
-      *ngFor="let mode of modes"
-      (click)="onModeChange($event, mode)"
-      [value]="mode"
-      [ngClass]="mode"
-    >
-      {{ mode | titlecase }}
+    <mat-button-toggle [class.buttonToggle]="toggleStyle" [value]="true" (click)="onViewPublicChange(true)">
+      共享数据
     </mat-button-toggle>
   </mat-button-toggle-group>
+<!--  <mat-button-toggle-group-->
+<!--    [value]="currentArchViewMode"-->
+<!--    *ngIf="appConfig.archiveWorkflowEnabled"-->
+<!--  >-->
+<!--    <mat-button-toggle-->
+<!--      *ngFor="let mode of modes"-->
+<!--      (click)="onModeChange($event, mode)"-->
+<!--      [value]="mode"-->
+<!--      [ngClass]="mode"-->
+<!--    >-->
+<!--      {{ mode | titlecase }}-->
+<!--    </mat-button-toggle>-->
+<!--  </mat-button-toggle-group>-->
 </div>
 
 <div class="action-container" [class.hidden]="loading$ | async">
@@ -58,7 +58,7 @@
     (click)="onAddToBatch()"
     color="primary"
   >
-    <mat-icon> shopping_cart </mat-icon> Add to Cart
+    <mat-icon> shopping_cart </mat-icon> 批量处理
   </button>
 </div>
 

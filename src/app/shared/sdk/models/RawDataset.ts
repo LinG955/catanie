@@ -1,8 +1,8 @@
 /* tslint:disable */
 import {
+  PublishedData,
   Sample,
   Proposal,
-  PublishedData,
   Datablock,
   OrigDatablock,
   Attachment,
@@ -41,23 +41,22 @@ export interface RawDatasetInterface {
   "accessGroups"?: Array<any>;
   "createdBy"?: string;
   "updatedBy"?: string;
+  "history"?: Array<any>;
+  "datasetlifecycle"?: any;
+  "publisheddataId"?: string;
   "createdAt"?: Date;
   "updatedAt"?: Date;
   "sampleId"?: string;
   "proposalId"?: string;
-  "publisheddataId"?: string;
-  "datasetlifecycle"?: any;
-  "history"?: Array<any>;
   "instrumentId"?: string;
   "techniques"?: Array<any>;
-  samples?: Sample[];
+  historyList?: any[];
+  datasetLifecycle?: any[];
+  publisheddata?: PublishedData;
   sample?: Sample;
   proposal?: Proposal;
-  publisheddata?: PublishedData;
-  datasetLifecycle?: any[];
   datablocks?: Datablock[];
   origdatablocks?: OrigDatablock[];
-  historyList?: any[];
   attachments?: Attachment[];
   instrument?: Instrument;
   techniquesList?: any[];
@@ -94,23 +93,22 @@ export class RawDataset implements RawDatasetInterface {
   "accessGroups": Array<any>;
   "createdBy": string;
   "updatedBy": string;
+  "history": Array<any>;
+  "datasetlifecycle": any;
+  "publisheddataId": string;
   "createdAt": Date;
   "updatedAt": Date;
   "sampleId": string;
   "proposalId": string;
-  "publisheddataId": string;
-  "datasetlifecycle": any;
-  "history": Array<any>;
   "instrumentId": string;
   "techniques": Array<any>;
-  samples: Sample[];
+  historyList: any[];
+  datasetLifecycle: any[];
+  publisheddata: PublishedData;
   sample: Sample;
   proposal: Proposal;
-  publisheddata: PublishedData;
-  datasetLifecycle: any[];
   datablocks: Datablock[];
   origdatablocks: OrigDatablock[];
-  historyList: any[];
   attachments: Attachment[];
   instrument: Instrument;
   techniquesList: any[];
@@ -267,6 +265,19 @@ export class RawDataset implements RawDatasetInterface {
           name: 'updatedBy',
           type: 'string'
         },
+        "history": {
+          name: 'history',
+          type: 'Array&lt;any&gt;',
+          default: <any>[]
+        },
+        "datasetlifecycle": {
+          name: 'datasetlifecycle',
+          type: 'any'
+        },
+        "publisheddataId": {
+          name: 'publisheddataId',
+          type: 'string'
+        },
         "createdAt": {
           name: 'createdAt',
           type: 'Date'
@@ -283,19 +294,6 @@ export class RawDataset implements RawDatasetInterface {
           name: 'proposalId',
           type: 'string'
         },
-        "publisheddataId": {
-          name: 'publisheddataId',
-          type: 'string'
-        },
-        "datasetlifecycle": {
-          name: 'datasetlifecycle',
-          type: 'any'
-        },
-        "history": {
-          name: 'history',
-          type: 'Array&lt;any&gt;',
-          default: <any>[]
-        },
         "instrumentId": {
           name: 'instrumentId',
           type: 'string'
@@ -307,13 +305,29 @@ export class RawDataset implements RawDatasetInterface {
         },
       },
       relations: {
-        samples: {
-          name: 'samples',
-          type: 'Sample[]',
-          model: 'Sample',
-          relationType: 'hasMany',
-                  keyFrom: 'pid',
-          keyTo: 'rawDatasetId'
+        historyList: {
+          name: 'historyList',
+          type: 'any[]',
+          model: '',
+          relationType: 'embedsMany',
+                  keyFrom: 'history',
+          keyTo: 'id'
+        },
+        datasetLifecycle: {
+          name: 'datasetLifecycle',
+          type: 'any[]',
+          model: '',
+          relationType: 'embedsOne',
+                  keyFrom: 'datasetlifecycle',
+          keyTo: 'id'
+        },
+        publisheddata: {
+          name: 'publisheddata',
+          type: 'PublishedData',
+          model: 'PublishedData',
+          relationType: 'belongsTo',
+                  keyFrom: 'publisheddataId',
+          keyTo: 'doi'
         },
         sample: {
           name: 'sample',
@@ -331,22 +345,6 @@ export class RawDataset implements RawDatasetInterface {
                   keyFrom: 'proposalId',
           keyTo: 'proposalId'
         },
-        publisheddata: {
-          name: 'publisheddata',
-          type: 'PublishedData',
-          model: 'PublishedData',
-          relationType: 'belongsTo',
-                  keyFrom: 'publisheddataId',
-          keyTo: 'doi'
-        },
-        datasetLifecycle: {
-          name: 'datasetLifecycle',
-          type: 'any[]',
-          model: '',
-          relationType: 'embedsOne',
-                  keyFrom: 'datasetlifecycle',
-          keyTo: 'id'
-        },
         datablocks: {
           name: 'datablocks',
           type: 'Datablock[]',
@@ -362,14 +360,6 @@ export class RawDataset implements RawDatasetInterface {
           relationType: 'hasMany',
                   keyFrom: 'pid',
           keyTo: 'rawDatasetId'
-        },
-        historyList: {
-          name: 'historyList',
-          type: 'any[]',
-          model: '',
-          relationType: 'embedsMany',
-                  keyFrom: 'history',
-          keyTo: 'id'
         },
         attachments: {
           name: 'attachments',

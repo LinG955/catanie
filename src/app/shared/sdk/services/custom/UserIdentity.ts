@@ -31,7 +31,7 @@ export class UserIdentityApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation user.
+   * 访存 belongsTo 关系 user。
    *
    * @param {any} id UserIdentity id
    *

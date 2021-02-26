@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Actions, ofType, createEffect } from "@ngrx/effects";
 import { ADAuthService } from "users/adauth.service";
+import { LssfAuthService } from "users/lssf-auth.service";
 import {
   LoopBackAuth,
   UserApi,
   UserIdentityApi,
   SDKToken,
   User,
-  UserIdentity,
+  UserIdentity, Dataset,
 } from "shared/sdk";
 import { Router } from "@angular/router";
 import * as fromActions from "state-management/actions/user.actions";
@@ -30,6 +31,7 @@ import {
   getCurrentUser,
 } from "state-management/selectors/user.selectors";
 import {
+  addGroupFilterAction,
   clearDatasetsStateAction,
   setDatasetsLimitFilterAction,
 } from "state-management/actions/datasets.actions";
@@ -54,7 +56,24 @@ export class UserEffects {
       ofType(fromActions.loginAction),
       map((action) => action.form),
       map(({ username, password, rememberMe }) =>
-        fromActions.activeDirLoginAction({ username, password, rememberMe })
+        fromActions.funcLoginAction({ username, password, rememberMe })
+      )
+    )
+  );
+
+  // 向Catamel请求中科院平台用户登录
+  lssfLogin$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromActions.lssfLoginAction),
+      switchMap(({ redirectUrl }) =>
+        this.lssfAuthService.login(redirectUrl).pipe(
+          switchMap(({ body }) => [
+            fromActions.lssfLoginSuccessAction(),
+            // 保存用户信息，这里的adLoginResponse只是普通的key，与adLogin$无关
+            fromActions.fetchUserAction({ adLoginResponse: body }),
+          ]),
+          catchError(() => of(fromActions.lssfLoginFailedAction()))
+        )
       )
     )
   );
@@ -87,9 +106,15 @@ export class UserEffects {
       ofType(fromActions.fetchUserAction),
       switchMap(({ adLoginResponse }) => {
         const token = new SDKToken({
-          id: adLoginResponse.access_token,
+          id: adLoginResponse.id,
           userId: adLoginResponse.userId,
         });
+        // 添加数据集搜索过滤
+        const group: string = adLoginResponse.searchGroup;
+        if (group !== "") {
+          this.datasetStore.dispatch(addGroupFilterAction({ group }));
+        }
+
         this.loopBackAuth.setToken(token);
         return this.userApi.findById(adLoginResponse.userId).pipe(
           switchMap((user: User) => [
@@ -301,9 +326,11 @@ export class UserEffects {
   constructor(
     private actions$: Actions,
     private activeDirAuthService: ADAuthService,
+    private lssfAuthService: LssfAuthService,
     private loopBackAuth: LoopBackAuth,
     private router: Router,
     private store: Store<User>,
+    private datasetStore: Store<Dataset>,
     private userApi: UserApi,
     private userIdentityApi: UserIdentityApi
   ) {}

@@ -27,7 +27,7 @@ import { getSubmitError } from "state-management/selectors/jobs.selectors";
 })
 export class DatasetTableActionsComponent implements OnInit, OnDestroy {
   loading$ = this.store.pipe(select(getIsLoading));
-
+  toggleStyle = false;
   @Input() selectedSets: Dataset[] = [];
 
   public currentArchViewMode: ArchViewMode;
@@ -57,6 +57,7 @@ export class DatasetTableActionsComponent implements OnInit, OnDestroy {
 
   onViewPublicChange(value: boolean): void {
     this.currentPublicViewMode = value;
+    this.toggleStyle = value;
     this.store.dispatch(
       setPublicViewModeAction({ isPublished: this.currentPublicViewMode })
     );

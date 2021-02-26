@@ -35,11 +35,11 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a related item by id for measurementPeriods.
+   * 按标识查找 measurementPeriods 的相关项。
    *
    * @param {any} id Proposal id
    *
-   * @param {any} fk Foreign key for measurementPeriods
+   * @param {any} fk measurementPeriods 的外键
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -65,11 +65,11 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a related item by id for measurementPeriods.
+   * 按标识删除 measurementPeriods 的相关项。
    *
    * @param {any} id Proposal id
    *
-   * @param {any} fk Foreign key for measurementPeriods
+   * @param {any} fk measurementPeriods 的外键
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -92,11 +92,11 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update a related item by id for measurementPeriods.
+   * 按标识更新 measurementPeriods 的相关项。
    *
    * @param {any} id Proposal id
    *
-   * @param {any} fk Foreign key for measurementPeriods
+   * @param {any} fk measurementPeriods 的外键
    *
    * @param {object} data Request data.
    *
@@ -128,11 +128,11 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a related item by id for attachments.
+   * 按标识查找 attachments 的相关项。
    *
    * @param {any} id Proposal id
    *
-   * @param {any} fk Foreign key for attachments
+   * @param {any} fk attachments 的外键
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -158,11 +158,11 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a related item by id for attachments.
+   * 按标识删除 attachments 的相关项。
    *
    * @param {any} id Proposal id
    *
-   * @param {any} fk Foreign key for attachments
+   * @param {any} fk attachments 的外键
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -185,11 +185,11 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update a related item by id for attachments.
+   * 按标识更新 attachments 的相关项。
    *
    * @param {any} id Proposal id
    *
-   * @param {any} fk Foreign key for attachments
+   * @param {any} fk attachments 的外键
    *
    * @param {object} data Request data.
    *
@@ -221,7 +221,7 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries measurementPeriods of Proposal.
+   * 查询 Proposal 的 measurementPeriods。
    *
    * @param {any} id Proposal id
    *
@@ -251,7 +251,7 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in measurementPeriods of this model.
+   * 在此模型的 measurementPeriods 中创建新实例。
    *
    * @param {any} id Proposal id
    *
@@ -284,7 +284,7 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes all measurementPeriods of this model.
+   * 删除此模型的所有 measurementPeriods。
    *
    * @param {any} id Proposal id
    *
@@ -308,7 +308,7 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Counts measurementPeriods of Proposal.
+   * 计算 measurementPeriods 的数量（Proposal）。
    *
    * @param {any} id Proposal id
    *
@@ -337,7 +337,7 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries attachments of Proposal.
+   * 查询 Proposal 的 attachments。
    *
    * @param {any} id Proposal id
    *
@@ -367,7 +367,7 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in attachments of this model.
+   * 在此模型的 attachments 中创建新实例。
    *
    * @param {any} id Proposal id
    *
@@ -400,7 +400,7 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes all attachments of this model.
+   * 删除此模型的所有 attachments。
    *
    * @param {any} id Proposal id
    *
@@ -424,7 +424,7 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Counts attachments of Proposal.
+   * 计算 attachments 的数量（Proposal）。
    *
    * @param {any} id Proposal id
    *
@@ -515,6 +515,68 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
+   * Return facet counts relevant for the given selected subset of datasets. 
+   *
+   * @param {object} fields Define the filter conditions by specifying the name and values of fields. There ia also support for a `text` search to look for strngs anywhere in the dataset.
+   *
+   * @param {any} facets Defines list of field names, for which facet counts should be calculated
+   *
+   * @param {object} options 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Proposal` object.)
+   * </em>
+   */
+  public fullfacet(fields: any = {}, facets: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Proposals/fullfacet";
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof fields !== 'undefined' && fields !== null) _urlParams.fields = fields;
+    if (typeof facets !== 'undefined' && facets !== null) _urlParams.facets = facets;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * Return datasets fulfilling complex filter conditions, including from fields of joined models.
+   *
+   * @param {object} fields Define the filter conditions by specifying the name of values of fields requested. There ia also support for a `text` search to look for strings anywhere in the dataset. Skip and limit parameters allow for paging.
+   *
+   * @param {object} limits Define further query parameters like skip, limit, order
+   *
+   * @param {object} options 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * <em>
+   * (The remote method definition does not provide any description.
+   * This usually means the response is a `Proposal` object.)
+   * </em>
+   */
+  public fullquery(fields: any = {}, limits: any = {}, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Proposals/fullquery";
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof fields !== 'undefined' && fields !== null) _urlParams.fields = fields;
+    if (typeof limits !== 'undefined' && limits !== null) _urlParams.limits = limits;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
    * Check if data is valid according to a schema
    *
    * @param {object} data Request data.
@@ -598,38 +660,7 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Return proposals fulfilling complex filter conditions, including from fields of joined models.
-   *
-   * @param {object} fields Define the filter conditions by specifying the name of values of fields requested. There is also support for a `text` search to look for strings anywhere in the proposal. Skip and limit parameters allow for paging.
-   *
-   * @param {object} limits Define further query parameters like skip, limit, order
-   *
-   * @param {object} options 
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Proposal` object.)
-   * </em>
-   */
-  public fullquery(fields: any = {}, limits: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Proposals/fullquery";
-    let _routeParams: any = {};
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof fields !== 'undefined' && fields !== null) _urlParams.fields = fields;
-    if (typeof limits !== 'undefined' && limits !== null) _urlParams.limits = limits;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Creates a new instance in measurementPeriods of this model.
+   * 在此模型的 measurementPeriods 中创建新实例。
    *
    * @param {any} id Proposal id
    *
@@ -662,7 +693,7 @@ export class ProposalApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in attachments of this model.
+   * 在此模型的 attachments 中创建新实例。
    *
    * @param {any} id Proposal id
    *

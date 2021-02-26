@@ -19,6 +19,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { PrivacyDialogComponent } from "./privacy-dialog/privacy-dialog.component";
+import {LssfAuthService} from "./lssf-auth.service";
 
 @NgModule({
   imports: [
@@ -40,6 +41,6 @@ import { PrivacyDialogComponent } from "./privacy-dialog/privacy-dialog.componen
   ],
   declarations: [LoginComponent, UserSettingsComponent, PrivacyDialogComponent],
   entryComponents: [PrivacyDialogComponent],
-  providers: [ADAuthService]
+  providers: [ADAuthService, LssfAuthService]
 })
 export class UsersModule {}

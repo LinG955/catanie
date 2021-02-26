@@ -3,20 +3,22 @@
     <div fxLayout="row" class="facility-logo">
       <div fxFlex="auto"></div>
       <div fxFlex="200px">
-        <img src="assets/images/esslogo.png" />
+        <img src="assets/images/nsrl-logo-blue.png" />
       </div>
       <div fxFlex="auto"></div>
     </div>
     <mat-card-content>
       <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-        <mat-form-field hintLabel="{{appConfig.facility}} account username">
-          <mat-label> <b> Username</b> </mat-label>
+<!--        <mat-form-field hintLabel="{{appConfig.facility}} account username">-->
+        <mat-form-field>
+          <mat-label> <b> 管理员 </b> </mat-label>
           <span matPrefix> <mat-icon>person</mat-icon> &nbsp; </span>
           <input matInput id="usernameInput" formControlName="username" />
         </mat-form-field>
 
-        <mat-form-field hintLabel="{{appConfig.facility}} account password">
-          <mat-label> <b> Password</b> </mat-label>
+<!--        <mat-form-field hintLabel="{{appConfig.facility}} account password">-->
+        <mat-form-field>
+          <mat-label> <b> 密码 </b> </mat-label>
           <span matPrefix> <mat-icon>vpn_key</mat-icon> &nbsp; </span>
           <input
             matInput
@@ -47,9 +49,9 @@
           color="primary"
           [ngClass]="{ loading: loading$ | async }"
         >
-          Log in
+          登录
         </button>
-        <mat-checkbox name="rememberMe">Remember me</mat-checkbox>
+        <mat-checkbox name="rememberMe">记住密码</mat-checkbox>
       </form>
     </mat-card-content>
   </mat-card>

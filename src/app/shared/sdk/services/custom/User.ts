@@ -33,11 +33,11 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a related item by id for accessTokens.
+   * 按标识查找 accessTokens 的相关项。
    *
    * @param {any} id User id
    *
-   * @param {any} fk Foreign key for accessTokens
+   * @param {any} fk accessTokens 的外键
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -63,11 +63,11 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a related item by id for accessTokens.
+   * 按标识删除 accessTokens 的相关项。
    *
    * @param {any} id User id
    *
-   * @param {any} fk Foreign key for accessTokens
+   * @param {any} fk accessTokens 的外键
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -90,11 +90,11 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update a related item by id for accessTokens.
+   * 按标识更新 accessTokens 的相关项。
    *
    * @param {any} id User id
    *
-   * @param {any} fk Foreign key for accessTokens
+   * @param {any} fk accessTokens 的外键
    *
    * @param {object} data Request data.
    *
@@ -126,7 +126,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches hasOne relation settings.
+   * 访存 hasOne 关系 settings。
    *
    * @param {any} id User id
    *
@@ -156,7 +156,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in settings of this model.
+   * 在此模型的 settings 中创建新实例。
    *
    * @param {any} id User id
    *
@@ -189,7 +189,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update settings of this model.
+   * 更新此模型的 settings。
    *
    * @param {any} id User id
    *
@@ -222,7 +222,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes settings of this model.
+   * 删除此模型的 settings。
    *
    * @param {any} id User id
    *
@@ -246,11 +246,11 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a related item by id for identities.
+   * 按标识查找 identities 的相关项。
    *
    * @param {any} id User id
    *
-   * @param {any} fk Foreign key for identities
+   * @param {any} fk identities 的外键
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -276,11 +276,11 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a related item by id for identities.
+   * 按标识删除 identities 的相关项。
    *
    * @param {any} id User id
    *
-   * @param {any} fk Foreign key for identities
+   * @param {any} fk identities 的外键
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -303,11 +303,11 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update a related item by id for identities.
+   * 按标识更新 identities 的相关项。
    *
    * @param {any} id User id
    *
-   * @param {any} fk Foreign key for identities
+   * @param {any} fk identities 的外键
    *
    * @param {object} data Request data.
    *
@@ -339,11 +339,11 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Find a related item by id for credentials.
+   * 按标识查找 credentials 的相关项。
    *
    * @param {any} id User id
    *
-   * @param {any} fk Foreign key for credentials
+   * @param {any} fk credentials 的外键
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -369,11 +369,11 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Delete a related item by id for credentials.
+   * 按标识删除 credentials 的相关项。
    *
    * @param {any} id User id
    *
-   * @param {any} fk Foreign key for credentials
+   * @param {any} fk credentials 的外键
    *
    * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
@@ -396,11 +396,11 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Update a related item by id for credentials.
+   * 按标识更新 credentials 的相关项。
    *
    * @param {any} id User id
    *
-   * @param {any} fk Foreign key for credentials
+   * @param {any} fk credentials 的外键
    *
    * @param {object} data Request data.
    *
@@ -432,7 +432,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries accessTokens of User.
+   * 查询 User 的 accessTokens。
    *
    * @param {any} id User id
    *
@@ -462,7 +462,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in accessTokens of this model.
+   * 在此模型的 accessTokens 中创建新实例。
    *
    * @param {any} id User id
    *
@@ -495,7 +495,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes all accessTokens of this model.
+   * 删除此模型的所有 accessTokens。
    *
    * @param {any} id User id
    *
@@ -519,7 +519,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Counts accessTokens of User.
+   * 计算 accessTokens 的数量（User）。
    *
    * @param {any} id User id
    *
@@ -548,7 +548,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries identities of User.
+   * 查询 User 的 identities。
    *
    * @param {any} id User id
    *
@@ -578,7 +578,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in identities of this model.
+   * 在此模型的 identities 中创建新实例。
    *
    * @param {any} id User id
    *
@@ -611,7 +611,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes all identities of this model.
+   * 删除此模型的所有 identities。
    *
    * @param {any} id User id
    *
@@ -635,7 +635,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Counts identities of User.
+   * 计算 identities 的数量（User）。
    *
    * @param {any} id User id
    *
@@ -664,7 +664,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Queries credentials of User.
+   * 查询 User 的 credentials。
    *
    * @param {any} id User id
    *
@@ -694,7 +694,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in credentials of this model.
+   * 在此模型的 credentials 中创建新实例。
    *
    * @param {any} id User id
    *
@@ -727,7 +727,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Deletes all credentials of this model.
+   * 删除此模型的所有 credentials。
    *
    * @param {any} id User id
    *
@@ -751,7 +751,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Counts credentials of User.
+   * 计算 credentials 的数量（User）。
    *
    * @param {any} id User id
    *
@@ -859,10 +859,10 @@ export class UserApi extends BaseLoopBackApi {
    *   populated with the actual data once the response is returned
    *   from the server.
    *
-   * The response body contains properties of the AccessToken created on login.
-   * Depending on the value of `include` parameter, the body may contain additional properties:
+   * 响应主体包含在登录时创建的 AccessToken 的属性。
+   * 根据“include”参数的值，主体可包含其他属性：
    * 
-   *   - `user` - `U+007BUserU+007D` - Data of the currently logged in user. (`include=user`)
+   *   - `user` - `U+007BUserU+007D` - 当前已登录用户的数据。 (`include=user`)
    * 
    *
    */
@@ -1113,7 +1113,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in settings of this model.
+   * 在此模型的 settings 中创建新实例。
    *
    * @param {any} id User id
    *
@@ -1146,7 +1146,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in accessTokens of this model.
+   * 在此模型的 accessTokens 中创建新实例。
    *
    * @param {any} id User id
    *
@@ -1179,7 +1179,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in identities of this model.
+   * 在此模型的 identities 中创建新实例。
    *
    * @param {any} id User id
    *
@@ -1212,7 +1212,7 @@ export class UserApi extends BaseLoopBackApi {
   }
 
   /**
-   * Creates a new instance in credentials of this model.
+   * 在此模型的 credentials 中创建新实例。
    *
    * @param {any} id User id
    *

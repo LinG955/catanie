@@ -1,6 +1,6 @@
 /* tslint:disable */
 import {
-  Dataset,
+  RawDataset,
   Attachment
 } from '../index';
 
@@ -16,12 +16,8 @@ export interface SampleInterface {
   "accessGroups"?: Array<any>;
   "createdBy"?: string;
   "updatedBy"?: string;
-  "datasetsId"?: string;
-  "datasetId"?: string;
-  "rawDatasetId"?: string;
-  "derivedDatasetId"?: string;
   "updatedAt"?: Date;
-  datasets?: Dataset;
+  datasets?: RawDataset[];
   attachments?: Attachment[];
 }
 
@@ -36,12 +32,8 @@ export class Sample implements SampleInterface {
   "accessGroups": Array<any>;
   "createdBy": string;
   "updatedBy": string;
-  "datasetsId": string;
-  "datasetId": string;
-  "rawDatasetId": string;
-  "derivedDatasetId": string;
   "updatedAt": Date;
-  datasets: Dataset;
+  datasets: RawDataset[];
   attachments: Attachment[];
   constructor(data?: SampleInterface) {
     Object.assign(this, data);
@@ -116,22 +108,6 @@ export class Sample implements SampleInterface {
           name: 'updatedBy',
           type: 'string'
         },
-        "datasetsId": {
-          name: 'datasetsId',
-          type: 'string'
-        },
-        "datasetId": {
-          name: 'datasetId',
-          type: 'string'
-        },
-        "rawDatasetId": {
-          name: 'rawDatasetId',
-          type: 'string'
-        },
-        "derivedDatasetId": {
-          name: 'derivedDatasetId',
-          type: 'string'
-        },
         "updatedAt": {
           name: 'updatedAt',
           type: 'Date'
@@ -140,11 +116,11 @@ export class Sample implements SampleInterface {
       relations: {
         datasets: {
           name: 'datasets',
-          type: 'Dataset',
-          model: 'Dataset',
-          relationType: 'belongsTo',
-                  keyFrom: 'datasetsId',
-          keyTo: 'pid'
+          type: 'RawDataset[]',
+          model: 'RawDataset',
+          relationType: 'hasMany',
+                  keyFrom: 'sampleId',
+          keyTo: 'sampleId'
         },
         attachments: {
           name: 'attachments',

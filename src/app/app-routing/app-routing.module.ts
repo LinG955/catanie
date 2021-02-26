@@ -47,38 +47,38 @@ import { LogbookGuard } from "app-routing/logbook.guard";
 import { DatasetsGuard } from "./datasets.guard";
 
 export const routes: Routes = [
-  {
-    path: "",
-    component: AnonymousLayoutComponent,
-    children: [
-      {
-        path: "",
-        redirectTo: "anonymous/datasets",
-        pathMatch: "full",
-      },
-      {
-        path: "anonymous/datasets",
-        component: AnonymousDashboardComponent,
-      },
-      {
-        path: "anonymous/datasets/:id",
-        component: AnonymousDetailsDashboardComponent,
-      },
-      {
-        path: "anonymous/about",
-        component: AboutComponent,
-      },
-      {
-        path: "anonymous/help",
-        component: HelpComponent,
-      },
-    ],
-  },
+  // {
+  //   path: "",
+  //   component: AnonymousLayoutComponent,
+  //   children: [
+  //     {
+  //       path: "",
+  //       redirectTo: "anonymous/datasets",
+  //       pathMatch: "full",
+  //     },
+  //     {
+  //       path: "anonymous/datasets",
+  //       component: AnonymousDashboardComponent,
+  //     },
+  //     {
+  //       path: "anonymous/datasets/:id",
+  //       component: AnonymousDetailsDashboardComponent,
+  //     },
+  //     {
+  //       path: "anonymous/about",
+  //       component: AboutComponent,
+  //     },
+  //     {
+  //       path: "anonymous/help",
+  //       component: HelpComponent,
+  //     },
+  //   ],
+  // },
   {
     path: "",
     component: LoginLayoutComponent,
     children: [
-      { path: "", redirectTo: "/login", pathMatch: "full" },
+      { path: "", redirectTo: "login", pathMatch: "full" },
       { path: "login", component: LoginComponent },
       {
         path: "login/error",
@@ -243,7 +243,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
       },
     ],
-  },
+  }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

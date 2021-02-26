@@ -1,6 +1,6 @@
 <mat-card>
   <div class="section-container">
-    <span class="title">Search</span>
+    <span class="title">数据检索</span>
     <button
       [disabled]="!(hasAppliedFilters$ | async)"
       mat-button
@@ -8,7 +8,7 @@
       color="primary"
       (click)="clearFacets()"
     >
-      <mat-icon>clear_all</mat-icon> Clear
+      <mat-icon>clear_all</mat-icon> 清除条件
     </button>
     <div style="clear: both"></div>
   </div>
@@ -16,7 +16,7 @@
   <app-search-bar
     #searchBar
     [prefilledValue]="searchTerms$ | async"
-    [placeholder]="'Text Search'"
+    [placeholder]="'任意字符'"
     [clear]="clearSearchBar"
     (onSearch)="textSearchChanged($event)"
     (onFocus)="textSearchChanged($event)"
@@ -39,7 +39,7 @@
       matInput
       class="location-input"
       [matChipInputFor]="locationChipList"
-      placeholder="Location"
+      placeholder="产生位置"
       aria-label="Location"
       [matAutocomplete]="loc"
     />
@@ -70,7 +70,7 @@
       matInput
       class="group-input"
       [matChipInputFor]="groupChipList"
-      placeholder="Group"
+      placeholder="所属分组"
       aria-label="Group"
       [matAutocomplete]="grp"
     />
@@ -101,7 +101,7 @@
       matInput
       class="type-input"
       [matChipInputFor]="typeChipList"
-      placeholder="Type"
+      placeholder="数据类型"
       aria-label="Type"
       [matAutocomplete]="type"
     />
@@ -132,7 +132,7 @@
       matInput
       class="keyword-input"
       [matChipInputFor]="keywordChipList"
-      placeholder="Keywords"
+      placeholder="关键词"
       aria-label="Keywords"
       [matAutocomplete]="kw"
     />
@@ -151,21 +151,21 @@
     <input
       matInput
       class="date-input"
-      placeholder="Select a date range"
+      placeholder="时间范围（点击右侧图标）"
       name="range-picker"
       [satDatepicker]="picker"
       [value]="creationTimeFilter$ | async"
       (dateChange)="dateChanged($event)"
     />
     <sat-datepicker-toggle matSuffix [for]="picker">
-      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+<!--      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>-->
     </sat-datepicker-toggle>
-    <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
+    <sat-datepicker touchUi #picker [rangeMode]="true"></sat-datepicker>
   </mat-form-field>
 
   <div class="section-container" *ngIf="appConfig.scienceSearchEnabled">
     <button mat-button color="primary" (click)="showAddConditionDialog()">
-      <mat-icon>add</mat-icon> Add Condition
+      <mat-icon>add</mat-icon> 添加搜索条件
     </button>
 
     <mat-chip-list class="scientific-chips" aria-orientation="vertical">

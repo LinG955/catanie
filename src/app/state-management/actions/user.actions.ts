@@ -23,6 +23,17 @@ export const activeDirLoginFailedAction = createAction(
   "[User] Active Directory Login Failed",
   props<{ username: string; password: string; rememberMe: boolean }>()
 );
+// 中科院重大基础设施共享平台登录
+export const lssfLoginAction = createAction(
+  "[User] Lssf Login",
+  props<{ redirectUrl: string }>()
+);
+export const lssfLoginSuccessAction = createAction(
+  "[User] Lssf Login Success"
+);
+export const lssfLoginFailedAction = createAction(
+  "[User] Lssf Login Failed"
+);
 
 export const funcLoginAction = createAction(
   "[User] Functional Login",

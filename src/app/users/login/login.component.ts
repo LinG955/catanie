@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, Inject } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { select, Store } from "@ngrx/store";
-import { loginAction } from "state-management/actions/user.actions";
+import {loginAction, lssfLoginAction} from "state-management/actions/user.actions";
 import { Subscription } from "rxjs";
 import { filter } from "rxjs/operators";
 import {
@@ -12,6 +12,9 @@ import {
 import { APP_CONFIG, AppConfig } from "app-config.module";
 import { MatDialog } from "@angular/material/dialog";
 import { PrivacyDialogComponent } from "users/privacy-dialog/privacy-dialog.component";
+import {DOCUMENT} from "@angular/common";
+import {LssfAuthService} from "../lssf-auth.service";
+import {addGroupFilterAction} from "../../state-management/actions/datasets.actions";
 
 interface LoginForm {
   username: string;
@@ -60,6 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
    * @memberof LoginComponent
    */
   onLogin() {
+    console.log("formValue: ", this.loginForm.value);
     const form: LoginForm = this.loginForm.value;
     this.store.dispatch(loginAction({ form }));
   }
@@ -78,9 +82,21 @@ export class LoginComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private store: Store<any>,
-    @Inject(APP_CONFIG) public appConfig: AppConfig
+    @Inject(APP_CONFIG) public appConfig: AppConfig,
+    @Inject(DOCUMENT) private doc: Document,
+
   ) {
     this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
+
+    // 通过referrer判断是否是从中科院平台重定向过来的，是的话触发lssfLoginAction，以URL为参数传递
+    console.log("url: ", this.doc.URL);
+    if (this.doc.referrer.indexOf("4200") !== -1) {
+      const redirectUrl: string = this.doc.URL;
+      // const group = "P2021-HLS-PT-002434";
+      // this.store.dispatch(addGroupFilterAction({ group }));
+      this.store.dispatch(lssfLoginAction({redirectUrl}));
+    }
+
   }
 
   ngOnInit() {
